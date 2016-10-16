@@ -1,0 +1,36 @@
+/* Create Band CSS */
+.closed #create-band .content { transform: translateX(-150%); }
+#create-band .content {
+    position: fixed;
+    background-color: #ffe265;
+    background-size: cover;
+    margin-left: 225px;
+    width: 50%;
+    height: 100%;
+    z-index: 3;
+    color: white;
+    transform: translateX(-100%);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#create-band.active .content {
+    transform: translateX(0px);
+    overflow-y: scroll;
+}
+#create-band .content .container { padding: 0 8%; }
+#create-band .content input, #create-band .content select, #create-band .content input, #create-band .content textarea { color: white; }
+#create-band ::-webkit-input-placeholder { color: #fff; }
+#create-band :-moz-placeholder {
+   color: #fff;
+   opacity:1;
+}
+#create-band ::-moz-placeholder {
+   color: #fff;
+   opacity:1;
+}
+#create-band :-ms-input-placeholder { color: #fff; }
+.create-band-header h1 { margin: 50px 0; }
+.close-overlay {
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 50px;
+}

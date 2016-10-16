@@ -1,0 +1,121 @@
+/* Home Page CSS */
+body {
+    background-color: #1a2227;
+}
+.header .logo {
+    float: left;
+    width: 84px;
+    height: 52px;
+    background-image: url('../images/logo.png');
+    background-size: 84px 52px;
+    margin-top: 15px;
+}
+.header .logo span { color: white; }
+.header .nav {
+    float: right;
+    margin-top: 30px;
+}
+.header .nav li {
+    display: inline-block;
+    color: white;
+    margin-right: 20px;
+    font-size: 14px;
+}
+.header .nav li.special {
+    border: 1px solid white;
+    padding: 7px 10px;
+    font-weight: bold;
+}
+.header .nav li a { color: white; }
+.header .nav li.special a:hover { border: none; }
+.header .nav li .username { font-weight: bold; margin-left: 10px;}
+
+#main {
+    /*background-image: url('../images/background1.jpg');*/
+    background-image: url('../images/background3.jpg');
+    background-color: #f1714a;
+    height: 645px;
+    width: 100%;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+}
+#main .tagline { text-align: left; padding: 12% 0% 4% 25%; }
+#main .tagline h1 { font-size: 40px; color: white; }
+
+#main .search { margin-top: 40px; }
+#main .search select, .search input[type=text] {
+    margin: 0;
+    font-size: 15px;
+    background-color: white;
+    margin-right: 10px;
+    vertical-align: middle; }
+#main .search input[type=text] { width: 35%; }
+#main .search select { width: 15%; }
+#main .search select.what { width: 25%; margin-top: 10px; }
+#main .search .btn { height: 45px; width: 100px !important; }
+#main .search .location-icon {
+    width: 30px;
+    height: 25px;
+    background-image: url('/images/icons/location-icon.png');
+    background-color: white;
+    background-position: center center;
+    background-size: 19px 25px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: absolute;
+    margin-top: 11px;
+    margin-left: -48px;
+}
+#main .search .location-icon:hover { cursor: pointer; }
+#main .search .location-icon.loading { background-image: url('/images/icons/location-icon-loading.png'); }
+
+#cookies.active {
+    background-color: #f8f00e;
+    padding: 8px 0 6px 0;
+    height: 55px;
+    border-bottom: 2px solid #e4dc08;
+    opacity: 1;
+}
+#cookies {
+    transform: translateY(0px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#cookies p {
+    width: 70%;
+    font-size: 0.71429em;
+    line-height: 18px;
+    float: left;
+}
+#cookies .btn.sluit {
+    background-color: #333;
+    margin: 10px 0 0 30px;
+    float: left;
+}
+.block .container .inner {
+    width: 40%;
+    padding: 40px 0;
+}
+.one {
+    color: white;
+    min-height: 600px;
+    background-color: #1a2227;
+    padding: 40px 10%;
+}
+
+.two {
+    color: #222;
+    height: 400px;
+    background-color: #fff;
+    padding: 40px 10%;
+}
+
+
+.one h1 span { font-weight: normal; font-family: 'CircularStd-Book'; }
+.one h1 span.bold { font-weight: bold; }
+.login-links {
+    margin: 0 auto;
+    width: 200px;
+    text-align: center;
+}

@@ -1,0 +1,38 @@
+<div id="content" class="explore">
+    <div class="form">
+        <div class="container ng-cloak">
+            <form ng-submit="search()">
+                <input type="text" ng-autocomplete ng-model="location" name="location" placeholder="Location.." ng-value="data.sessionUser.profile.city">
+                <select ng-model="radius" ng-init="radius='10'">
+                    <option value="10">10km Radius</option>
+                    <option value="50">50km Radius</option>
+                    <option value="100">100km Radius</option>
+                    <option value="500">500km Radius</option>
+                </select>
+                <input type="submit" class="btn white" value="Zoek Evenementen">
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="posts">
+            <h3 ng-show="!data.agendas.length">No events listed..</h2>
+            <div ng-repeat="agenda in data.agendas">
+                <a ng-href="/app/bands/{{ agenda.bandID._id }}?agenda={{ agenda._id }}">
+                    <div class="block">
+                        <div class="inner">
+                            <div class="band">
+                                <h3>{{ agenda.date }}: {{ agenda.bandID.name}}</h3>
+                                <span class="location">{{ agenda.venture }} -</span>
+                                <span class="location">&euro;{{ agenda.price }} - </span>
+                                <span class="location">{{ agenda.location }}</span>
+                            </div>
+                        </div>
+                        <div class="band-image">
+                            <img src="../images/ty2.jpg" alt="" width="110%" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div id="bandpage">
+    <div id="content" class="profile">
+        <div class="left">
+            <div class="main">
+                <div class="avatar">
+                    <h2>{{ data.band.name }}</h2>
+                    <h4>{{ data.band.city }}</h4>
+                    <h4 ng-repeat="genre in data.band.genres">{{ genre }}</h4>
+                </div>
+            </div>
+            <div class="bio">
+                <h3>BIOGRAPHY</h3>
+                <div ng-if="!data.band.bio.length">
+                    <p class="disabled">Bio not available.</p>
+                </div>
+                <p>{{ data.band.bio }}</p>
+                <div ng-if="data.adminRights == true">
+                    <a class="btn orange edit-bio">Edit Bio</a>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="agenda">
+                <h3>Agenda</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Date</th>
+                            <th>Venture</th>
+                            <th>Location</th>
+                            <th>Time</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr ng-repeat="key in data.band.agendas" ng-click="showDetails(key._id)" ng-class="{true: 'highlight', false: 'none'} [ key._id == urlID ]" class="data-row" tooltips title="Show info" tooltip-side="left" tooltip-try="false">
+                            <td>{{ key.date }}</td>
+                            <td>{{ key.venture }}</td>
+                            <td>{{ key.location }}</td>
+                            <td>{{ key.time }}</td>
+                            <td>&euro;{{ key.price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="data.adminRights == true">
+                    <form ng-submit="saveAgenda(newDate, newVenture, newLocation, newTime, newPrice)">
+                        <table>
+                            <tbody>
+                                <tr class="edit">
+                                    <td>
+                                        <datepicker date-format="dd/MM/yyyy">
+                                            <input required="required" type="text" ng-model="newDate" placeholder="18/12">
+                                        </datepicker>
+                                    </td>
+                                    </tr>
+
+
+                                <tr class="edit">
+                                    <td><input required="required" type="text" ng-model="newVenture" placeholder="Venture"></td>
+                                    <td><input required="required" type="text" ng-model="newLocation" placeholder="Location"></td>
+                                <tr>
+                                <tr class="edit">
+                                    <td><input required="required" type="text" ng-model="newTime" placeholder="20:00"></td>
+                                    <td><input required="required" type="text" ng-model="newPrice" placeholder="&euro; --"></td>
+                                </tr>
+                                <tr class="edit">
+                                    <td><input type="submit" class="btn orange" value="Add Event"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <a class="btn green edit-agenda">Update Agenda</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="right-sidebar">
+    <div class="full-overlay"></div>
+    <div class="content">
+        <div id="map"></div>
+        <div class="inner">
+            <h2>{{ agendaDetails.venture }}, {{ agendaDetails.location }}</h2>
+            <h3>{{ agendaDetails.date }} - &euro;{{ agendaDetails.price }} - {{ agendaDetails.time }}</h3>
+            <p> {{ agendaDetails.info }}</p>
+            <a href="#" class="btn white">Buy a ticket</a>
+            <hr>
+            <div ng-if="data.adminRights == true">
+                <a class="btn red" ng-confirm-click="Are you sure?" ng-click="removeAgenda(agendaDetails._id)">Remove Agenda</a>
+            </div>
+            <script>
+                function initMap(agendaDetails) {
+                    var myLatLng = {lat: agendaDetails.loc.y, lng: agendaDetails.loc.x};
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 14,
+                        center: myLatLng
+                    });
+                    var marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        title: agendaDetails.venture
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</div>

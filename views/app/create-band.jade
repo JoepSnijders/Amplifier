@@ -1,0 +1,41 @@
+#create-band
+    .full-overlay
+    .content(ng-controller="profileCtrl")
+        .container
+            a(class='close-overlay')
+                img(src="/images/close-white.png" width='17' height='17')
+
+            .create-band-header
+                h1 Add your band to Amplifier
+            .create-band-content
+                form(ng-submit="addBand(bandname, bandbio, bandcity, bandgenres)")
+                    Label Band name *
+                    br
+                    input(type="text" ng-model="bandname" required="required")
+                    br
+                    label Please tell us more about your band.. *
+                    textarea(ng-model="bandbio" required="required")
+                    br
+                    label What kind of music do you play? *
+                    br 
+                    select(ng-model="bandgenres" multiple required="required")
+                        option(value="Psychdelic") Psychedelic
+                        option(value="Garage") Garage
+                        option(value="Jazz") Jazz
+                    
+                    br
+                    Label Where are you from? *
+                    br
+                    input(type="text" required="required" ng-model="bandcity")
+                    div(ng-controller="uploadCtrl")
+                      label Upload a band image. This will be displayed on the profile page.
+                      input(class="btn white" type="file" name="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="2000" ngf-max-size="1MB")
+                      div(style="font:smaller")
+                        p File: {{f.name}} 
+                        p Errors: {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                        span(class="progress" ng-show="f.progress >= 0")
+                          div(style="width:{{f.progress}}%" ng-bind="f.progress + '%'")     
+                        p Error Message: {{ errorMsg }}
+                    br
+                    input(type='submit' name='submit' class="btn log-out")
+            

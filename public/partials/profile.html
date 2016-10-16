@@ -1,0 +1,185 @@
+<div id="content" class="profile">
+    <div class="left">
+        <div class="main">
+            <div class="avatar">
+                <div ng-show="data.user.facebook.id">
+                    <img ng-src="http://graph.facebook.com/{{ data.user.facebook.id }}/picture?width=100" />
+                </div>
+                <div ng-show="data.user.google.id">
+                    <img src="sessionUser.google.profilePicture" width="100" />
+                </div>
+                <div ng-show="data.user.twitter.id">
+                    <img src="sessionUser.twitter.profilePicture" width="100" />
+                </div>
+                <div ng-show="data.user.local.firstName">
+                    <img src="/images/no-profile.jpg" width="100" />
+                </div>
+                <h2>
+                    {{ data.user.facebook.firstName }} {{ data.user.facebook.lastName }}
+                    {{ data.user.twitter.firstName }} {{ data.user.twitter.lastName }}
+                    {{ data.user.google.firstName }} {{ data.user.google.lastName }}
+                    {{ data.user.local.firstName }} {{ data.user.local.lastName }}
+                </h2>
+                <h4>{{ profile.data.user.city }}</h4>
+                <div ng-if="data.ownPage == true">
+                    <a href="/lougout" class="btn logout">Edit Profile Information</a>
+                    <br>
+                    <br>
+                    <a _target='_self' href="/logout" class="btn logout">Log out</a>
+                </div>
+            </div>
+        </div>
+        <div ng-if="data.ownPage == true">
+            <div class="info">
+                <h3>{{ data.user.facebook.firstName}} {{ data.user.facebook.lastName}}</h3>
+                <p>{{ data.user.facebook.email }}</p>
+                <p>Member Since: <time am-time-ago="data.user.memberSince"></time>, <time>{{ data.user.memberSince | date:'dd/MM/yyyy' }}</time>.</p>
+                <p ng-show="data.user.profile.city">
+                    {{ data.user.profile.city }}
+                    <br />
+                    <span ng-show="data.user.profile.postcode">{{ data.user.profile.postcode }}</span>
+                </p>
+                <form ng-submit="editInfo(city, postcode)">
+                    <input type="text" placeholder="City.." ng-model="city">
+                    <input type="text" placeholder="Postcode.." ng-model="postcode">
+                    <input type="submit" class="btn yellow" value="Save">
+                </form>
+            </div>
+        </div>
+        <div class="bio">
+            <h3>BIOGRAPHY</h3>
+            <p class="disabled" ng-show="!data.user.profile.bio">No bio information available.</p>
+            <div ng-hide="editorEnabled">
+              {{ data.user.profile.bio }}
+              <div ng-if="data.ownPage == true">
+                  <br />
+                  <a ng-click="enableEditor()" class="btn orange edit-bio">Edit Bio</a>
+              </div>
+            </div>
+            <div ng-if="data.ownPage == true">
+                <div ng-show="editorEnabled">
+                    <form ng-submit="saveBio(newBio)">
+                        <textarea ng-init="newBio = data.user.profile.bio" ng-model="newBio"></textarea>
+                        <br/>
+                        <input class="btn green" type="submit" href="#" value="Submit">
+                        <span class="disabled"> or <a ng-click="profile.disableEditor()">cancel</a>.</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="bands" ng-class="{'highlight': data.user.lookingForBand}">
+            <h3>BANDS</h3>
+            <div ng-if="data.ownPage == false && data.user.lookingForBand == false">
+                <p class="disabled">This user is not in a band and is not looking for one.</p>
+            </div>
+            <div ng-if="data.ownPage == false && data.user.lookingForBand == true">
+                <p class="disabled">This user is looking for a band! You can send a <b>message</b>.</p>
+            </div>
+            <div ng-if="data.ownPage == true">
+                <div ng-if="data.user.lookingForBand == true">
+                    <p class="disabled">Cool! You are currently enlisted as looking for a band. This means that bands may contact you through the messaging service. You can also get in contact with bands that are looking for musicians at a bands profile page. Complete your profile by adding instruments, genres and favourite artists in order to increase your chances.</p>
+                    <form ng-click="stopLooking()">
+                        <input class="btn red" type="submit" name="stopLookingForBand" value="Stop looking for bands">
+                    </form>
+                </div>
+                <div ng-if="data.sessionUser.lookingForBand != true">
+                    <p class="disabled">You are not in a band at the moment.</p>
+                    <form ng-click="startLooking()">
+                        <input type="submit" class="btn orange" name="lookingForBand" value="Start looking for a band!">
+                    </form>
+                </div>
+                <p class="disabled">or..</p>
+                <a class="btn orange create-band">Create a band</a>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="instruments">
+            <h3>INSTRUMENTS AND SKILLS</h3>
+            <ul>
+                <li ng-repeat="key in data.user.instruments" class="genre">
+                    {{ key.name }} <span>{{ key.experience }}</span>
+                    <span ng-if="data.ownPage == true" ng-click="removeInstrument(key._id)" class="remove">X</span>
+                </li>
+            </ul>
+            <p ng-show="!data.user.instruments.length" class="disabled">
+                Do you play an instrument?
+            </p>
+            <div ng-if="data.ownPage == true">
+                <form ng-submit="saveInstrument(newInstrument, newExperience)">
+                    <select ng-model="newInstrument" required="required">
+                        <option value="" class="disabled">Select an instrument..</option>
+                        <option value="Guitar">Guitar</option>
+                        <option value="Bass">Bass</option>
+                        <option value="Singer">Singer</option>
+                    </select>
+                    <select ng-model="newExperience" required="required">
+                        <option value="Advanced">Advanced</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Beginner">Beginner</option>
+                    </select>
+                    <input class="btn green" type="submit" href="#" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="genres">
+            <h3>FAVOURITE GENRES</h3>
+            <ul>
+                <li class="genre" ng-repeat="key in data.user.genres"> {{ key.name }}
+                    <span ng-if="data.ownPage == true" class="remove" ng-click="removeGenre(key._id)">X</span>
+                </li>
+            </ul>
+            <p ng-show="!data.user.genres.length" class="disabled">
+                You do not have any favourite genres to display at this moment.
+            </p>
+            <div ng-if="data.ownPage == true">
+                <form ng-submit="saveGenre(genre)">
+                    <select ng-model="genre" required="required">
+                        <option disabled selected value="">Select a genre..</option>
+                        <option value="Psychdelic">Psychedelic</option>
+                        <option value="Garage">Garage</option>
+                        <option value="Jazz">Jazz</option>
+                    </select>
+                    <input type="submit" class="btn green" value="Add genres">
+                </form>
+            </div>
+        </div>
+        <div class="artists">
+            <h3>ARTISTS</h3>
+            <ul class="artists-list">
+                <li ng-repeat="artist in data.user.artists">
+                    <img src="{{ artist.image }}" alt="" ng-click="zoomArtist(artist._id)" width="60" tooltips tooltip-title="View artist"/>
+                    <span>{{ artist.name }}</span>
+                </li>
+            </ul>
+            <p ng-show="!data.user.artists.length" class="disabled">
+                No favourite artists listed yet, let's add some..
+            </p>
+            <div ng-if="data.ownPage == true">
+                <form ng-submit="saveArtist(artist)">
+                    <input type="text" ng-model="artist" placeholder="Artist name.." required="required">
+                    <input type="submit" name="submit" class="btn green" value="Add artist">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="profile-footer">
+        <div class="shading"></div>
+        <img ng-repeat="artist in data.user.artists" src="{{ artist.image }}" alt="" />
+    </div>
+</div>
+
+<div id="right-sidebar">
+    <div class="full-overlay"></div>
+    <div class="content">
+        <img src="{{ zoomedArtist.image }}" class="zoomedImage">
+        <div class="inner">
+            <h2>{{ zoomedArtist.name }}</h2>
+            <p ng-bind-html="zoomedArtistBio"></p>
+            <hr>
+            <div ng-if="data.ownPage == true">
+                <a href="#" class="btn red" ng-click='removeArtist(zoomedArtist._id)'>Remove as favourite artist</a>
+            </div>
+        </div>
+    </div>
+</div>

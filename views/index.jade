@@ -1,0 +1,185 @@
+doctype
+html(ng-app="amplifier")
+    head
+        title Introducing Amplifier App
+        meta(name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0")
+        link(rel='stylesheet' href='/stylesheets/style.css')        
+        link(rel='stylesheet' href='/stylesheets/homepage.css')
+        link(rel='stylesheet' href='/stylesheets/login.css')
+        link(rel='stylesheet' href='/stylesheets/homepage-responsive.css')
+        link(rel='stylesheet' href='/stylesheets/login-responsive.css')
+        link(rel='stylesheet' href='/stylesheets/angular-tooltips.css')
+        link(rel='stylesheet' href='/stylesheets/angular-datepicker.css')
+        link(href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css')
+    body
+        include login
+        include signup
+        .index(ng-controller="homeCtrl")    
+            //- #cookies.active
+            //-     .container
+            //-         p Amplifier gebruikt <b>cookies</b> om onze diensten nog makkelijker en persoonlijker te maken. Met de cookies kunnen wij evenementen en bands aanpassen aan jouw interesses en kun je informatie delen via social media. Bezoek je onze website, dan ga je akkoord met het verwerken van de gegevens die wij hebben verkregen met behulp van deze cookies.
+            //-         .btn.sluit Sluiten
+            #main
+                .container
+                    .header
+                        a(href='/')
+                            .logo     
+                        ul.nav
+                            if (sessionUser)
+                                if(typeof sessionUser.facebook.token !== 'undefined')
+                                    li
+                                        a(href="/app/profile/#{sessionUser._id}")
+                                            img(src='http://graph.facebook.com/' + sessionUser.facebook.id + '/picture?width=25' width="25" class="avatar")
+                                            span.username #{sessionUser.facebook.firstName} #{sessionUser.facebook.lastName}
+                                if(typeof sessionUser.google.token !== 'undefined')
+                                    li
+                                        a(href="/app/profile/#{sessionUser._id}")
+                                            img(src=sessionUser.google.profilePicture width="25" class="avatar")
+                                            span.username #{sessionUser.google.firstName} #{sessionUser.google.lastName}
+                                if(typeof sessionUser.twitter.token !== 'undefined')
+                                    li
+                                        a(href="/app/profile/#{sessionUser._id}")
+                                            img(src=sessionUser.twitter.profilePicture width="25" class="avatar")
+                                            span.username #{sessionUser.twitter.name}
+                                if(typeof sessionUser.local.username !== 'undefined')
+                                    li
+                                        a(href="/app/profile/#{sessionUser._id}")
+                                            //- img(src='/images/no-profile.jpg' width="25" class="avatar")
+                                            span.username #{sessionUser.local.username}
+                                li
+                                    a(href="#" class="login") Logout
+                            else 
+                                li.special
+                                    a(href="#" class="signup") Create an account
+                                li
+                                    a(href="#" class="signup") Help
+                                li
+                                    a(href="#" class="login") Login
+                    .tagline
+                        h1 Discover your local music scene.
+                        form(ng-submit="send(url, radius, location)" class="search")
+                            input(id="location" required="required" ng-autocomplete ng-model="location" type="text" name="location" placeholder="Enter your location..")
+                            div(class="location-icon" tooltips title="Use your current location. May take a few seconds." tooltip-side="top" tooltip-try="false")
+                            select(required="required" name="radius" ng-model="radius" ng-init="radius='10'")
+                                option(value="") Radius..
+                                option(value="10") < 10km
+                                option(value="50") < 50km
+                                option(value="100") < 100km
+                                option(value="500") < 500km
+                            br
+                            select(class="what" name="type" ng-model="url")
+                                option(value="") I'm looking for events
+                                option(value="/bands") I want to join a band!
+                                option(value="/musicians") We are looking for a musician.
+                            br
+                            input(type="submit" value="Search!" class="btn red")
+            .block.one
+                .container
+                    .inner
+                        h1 Todolist
+                        ul
+                            li - New name
+                            li - Emails
+                            li - Messaging
+                            li - Auto location fix
+                            li - Complete homepage design
+                            li - Improve profile page editing
+                            li - All to one page? Maybe not..
+                            li - Safe image uploads
+                        br
+                        br
+                    .right
+                        h2 Let me know what I can improve.
+                        #disqus_thread
+                        script(type="text/javascript").
+                            /* * * CONFIGURATION VARIABLES * * */
+                            var disqus_shortname = 'amplifierapp';
+                            /* * * DON'T EDIT BELOW THIS LINE * * */
+                            (function() {
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
+                            
+                        noscript
+                            Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+            .block.two
+                .container  
+                     .inner
+                        h1 Speel de muziek waar jij van houdt. 
+
+                        p Moeite met het vinden van mensen met dezelfde muzikale passie of benieuwd welke bands er in de buurt spelen? Misschien kunnen wij je helpen met het vinden van de juiste personen.
+        //- script(type="text/javascript" src="dist/all.min.js")
+        script(type="text/javascript" src="javascript/jquery.min.js")
+        script(type="text/javascript" src="/javascript/angular.js")
+        script(type="text/javascript" src="/javascript/moment.min.js")
+        script(type="text/javascript" src="/javascript/angular-moment.min.js")
+        script(type="text/javascript" src="/javascript/angular-datepicker.js")
+        script(type="text/javascript" src="/javascript/angular-router.min.js")
+        script(type="text/javascript" src="/javascript/angular-autocomplete.js")
+        script(type="text/javascript" src="/javascript/angular-tooltips.js")
+        script(type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false?key=AIzaSyDZh3S94AeeO_HDNZP--UjVccNBartYQmY")
+        script(type="text/javascript" src="/javascript/global.js")
+        script(type="text/javascript" src="/javascript/controller.js")
+        
+        script.
+          var x = document.getElementById("location");
+          var geocoder = "";
+          function initialize() {
+              geocoder = new google.maps.Geocoder();
+          }
+          $(document).on("click", ".location-icon", function(e){
+              getLocation();
+              $(this).addClass("loading");
+          });
+          function getLocation() {
+              if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(showPosition);
+              } else {
+                  x.value = "Geolocation is not supported by this browser.";
+              }
+          }
+          function showPosition(position) {
+              var lat = position.coords.latitude;
+              var lng = position.coords.longitude;
+              codeLatLng(lat, lng);
+          }
+          function codeLatLng(lat, lng) {
+              var latlng = new google.maps.LatLng(lat, lng);
+              geocoder.geocode({'latLng': latlng}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                  if (results[1]) {
+                      //formatted address
+                      gpsLocation = (results[0].formatted_address);
+                      x.value = gpsLocation;
+                      $("#location").trigger('input');
+                      //find country name
+                      for (var i=0; i<results[0].address_components.length; i++) {
+                          for (var b=0;b<results[0].address_components[i].types.length;b++) {
+                              //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                              if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                                  //this is the object you are looking for
+                                  city= results[0].address_components[i];
+                                  break;
+                              }
+                          }
+                      }
+                      //city data
+                      gpsCity = city.short_name + " " + city.long_name;
+                      $(".location-icon").removeClass("loading");
+                      } else {
+                        // Nothing found
+                      }
+                  } else {
+                      // Geocoder Failed
+                  }
+              });
+            }
+        script.
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-15365590-4', 'auto');
+          ga('send', 'pageview');

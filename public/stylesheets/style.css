@@ -1,0 +1,436 @@
+/*RESET*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* FONTS */
+@font-face {
+  font-family: 'CircularStd-Black';
+  src: url("../fonts/CircularStd-Black.otf") format("opentype");
+}
+@font-face {
+  font-family: 'CircularStd-Bold';
+  src: url("../fonts/CircularStd-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: 'CircularStd-Medium';
+  src: url("../fonts/CircularStd-Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: 'CircularStd-Book';
+  src: url("../fonts/CircularStd-Book.otf") format("opentype");
+}
+
+/* MAIN */
+body {
+    font-family: 'Roboto', 'CircularStd-Book', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(29, 29, 29);
+    background-color: #f2f3ee;
+}
+.container { padding: 0 3%; }
+a { text-decoration: none; }
+li {
+    line-height: 24px;
+    font-size: 0.8em;
+}
+img { vertical-align: middle; }
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Neue Haas Unica', 'CircularStd-Black', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 20px 0;
+    line-height: 44px;
+}
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+    font-family: 'CircularStd-Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 30px;
+}
+h3 {
+    font-family: 'CircularStd-Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px 0;
+    text-transform: uppercase;
+    line-height: 30px;
+    color: #222222;
+}
+h4 {
+    font-family: 'CircularStd-Book', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+    line-height: 30px;
+}
+p {
+    font-size: 0.9em;
+    line-height: 24px;
+}
+.disabled { color: #c4c3c3; }
+.disabled.small { font-size: 11px; }
+span.disabled { font-size: 11px; }
+b { font-weight: bold; }
+hr {
+    border: none;
+    background-color: #eee;
+    height: 1px;
+    margin: 20px 0px 20px 0px;
+    clear: both;
+}
+.clear { clear: both; }
+input {
+    width: 25%;
+    height: 45px;
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+    margin: 20px 20px 20px 0;
+    border-radius: 2px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+input:focus {
+    border-bottom: 2px solid #3498db;
+    transition: 0.1s all ease;
+    outline: none;
+}
+input.ng-invalid.ng-dirty { border-bottom: 2px solid red; transition: 0.1s all ease; }
+input.ng-valid.ng-dirty { border-bottom: 2px solid rgb(0, 246, 106); transition: 0.1s all ease; }
+input[type=submit] { -webkit-appearance: none; }
+textarea {
+    width: 100%;
+    height: 140px;
+    font-size: 14px;
+    background: transparent;
+    border: 1px solid #eee;
+    margin: 20px 0 20px 0;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+textarea:focus {
+    border: 2px solid #3498db;
+    transition: 0.1s all ease;
+    outline: none;
+}
+select {
+    width: 25%;
+    font-size: 12px;
+    border: none;
+    background: transparent;
+    margin: 0px 20px;
+    padding: 10px 15px;
+    height: 45px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   border-radius: 2px;
+}
+select:focus {
+    border-bottom: 2px solid #3498db;
+    transition: 0.1s all ease;
+    outline: none;
+}
+.btn {
+    padding: 10px 15px 10px 15px;
+    height: inherit;
+    border-radius: 2px;
+    font-size: 12px;
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    width: inherit !important;
+    border: none;
+}
+.btn.white { background-color: #fff; border: 1px solid #eee; color: #333; }
+.btn.orange { background-color: #fec561; }
+.btn.yellow { background-color: #f1c40f; }
+.btn.green { background-color: #2ecc71; }
+.btn[disabled] { background-color: rgb(190, 190, 190); cursor: default; }
+.btn.red { background-color: #f1714a; }
+.btn.logout {
+    background-color: transparent;
+    float: left;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+/* SIDEBAR */
+#sidebar {
+    min-width: 225px;
+    max-width: 225px;
+    height: 100%;
+    position: fixed;
+    background-color: #2c2b2f;
+    color: white;
+    float: left;
+    z-index: 4;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#sidebar .close {
+    position: absolute;
+    cursor: pointer;
+    bottom: 20px;
+    right: 20px;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.closed #sidebar .close { right: 8px; }
+#sidebar.closed { transform: translateX(-200px); }
+#sidebar a .logo {
+    width: 84px;
+    height: 52px;
+    background: url('../images/logo.png') no-repeat;
+    background-size: 84px 52px;
+    display: inline-block;
+    margin: 35px 40px 0 40px;
+    color: white;
+}
+#sidebar .nav {
+    margin: 40px 0 0 0;
+    padding-bottom: 30px;
+}
+#sidebar .nav li {
+    font-size: 16px;
+    cursor: pointer;
+    padding: 35px 40px;
+}
+#sidebar .nav a li {
+    color: white;
+    text-decoration: none;
+    padding-bottom: 3px;
+    font-family: 'CircularStd-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    transition: all 0.2s ease-in-out;
+}
+#sidebar .nav a li span.active { border-bottom: 2px solid white; }
+#sidebar .nav a li:hover span.active { border-bottom: 2px solid white; }
+#sidebar .nav a li:hover span { border-bottom: 2px solid rgba(255, 255, 255, 0.5); }
+#sidebar .sidebar-content hr { background-color: #3a3b3b; }
+#sidebar .profile { margin: 20px 50px 20px 50px; }
+#sidebar .profile .name {
+    font-size: 14px;
+    font-family: 'CircularStd-Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+#sidebar .profile .name a { color: #fff; }
+#sidebar .profile .avatar {
+    padding-top: 2px;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+
+/* CONTENT */
+#content {
+    margin: 0 0 0 225px;
+    float: left;
+    width: calc(100% - 225px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.closed #content {
+    margin: 0 0 0 25px;
+    width: calc(100% - 25px);
+}
+#content .block {
+    background-color: white;
+    height: 300px;
+    width: 23%;
+    color: rgb(49, 49, 49);
+    margin: 10px 10px 10px 10px;
+    transition: all 0.3 ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    border: 1px solid #ededf0;
+    border-bottom: 1px solid #dcdce0;
+    box-sizing: border-box;
+    float: left;
+    overflow: hidden;
+}
+#content .block h3 { transition: 0.1s; margin: 0; }
+#content .block:hover h3 { color: #b3b3b3; }
+#content .block .genre span { font-size: 12px; }
+#content .block .inner { padding: 0.7em; }
+#content .block .location {
+    text-transform: uppercase;
+    font-size: 11px;
+    color: rgb(153, 153, 153);
+}
+
+/* PROFILE */
+#content.profile { background-color: #fff; }
+#content.profile .left {
+    float: left;
+    width: 50%;
+    border-right: 1px solid #f3f3f3;
+    box-sizing: border-box;
+}
+#content.profile .right {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+}
+#content.profile .left .main {
+    min-height: 300px;
+    background-color: #333;
+    background-image: url('../images/keys.jpg');
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    padding: 40px 0;
+}
+#content.profile .left .main .avatar img { border-radius: 2px; margin-top: 10%; }
+#content.profile .left .info, #content.profile .left .bio, #content.profile .left .bands,  #content.profile .right .agenda, #content.profile .right .instruments, #content.profile .right .genres, #content.profile .right .artists {
+    padding: 30px 40px;
+    border-bottom: 1px solid #f3f3f3;
+}
+#content li.genre span { font-size: 9px; color: #696969; text-transform: uppercase; margin-left: 10px; }
+#content.profile .left .bands, #content.profile .right .artists { border-bottom: none; }
+#content.profile .right .artists img { margin: 5px 10px 5px 0; border-radius: 2px; cursor: pointer; }
+
+#right-sidebar .content {
+    position: fixed;
+    text-align: center;
+    width: 400px;
+
+    transform: translateX(100%);
+    height: 100%;
+    background-color: #fff;
+    z-index: 4;
+    right: 0;
+    top: 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#right-sidebar .inner { padding: 40px 30px; }
+#right-sidebar .content .inner h2 { text-align: center; }
+#right-sidebar .content .inner p { text-align: left; font-family: 'Scala Pro'; }
+#right-sidebar .content img { height: 180px; margin: 0 auto; margin-top: 40px; text-align: center; border-radius: 2px; }
+#right-sidebar.active .content {
+    transform: translateX(0);
+    opacity: 1;
+}
+#right-sidebar #map { height: 200px; }
+#content.profile .right .artist-profile .zoomedImage { width: 100%; }
+#content.profile .right .artist-profile .inner { padding: 30px 40px 50px 40px; }
+#content .profile-footer {
+    height: 140px;
+    width: 100%;
+    background-color: #333;
+    background-image: url('../images/profile-background2.jpg');
+	background-size: cover;
+	background-position: center center;
+    position: relative;
+    overflow: hidden;
+}
+#content.profile .bands.highlight {
+    background-color: #fffdf5;
+}
+#content .profile-footer .overlay { position: absolute; z-index: 2; }
+#content .profile-footer .shading {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -140px 0 rgba(0,0,0,0.7) inset;
+}
+#content .profile-footer img { width: 25%; }
+#content ul.artists-list {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    width: 100%;
+}
+#content ul.artists-list li { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+
+
+/* All BANDS / All AGENDAS */
+#content.bands, #content.explore { background-color: #f2f3ee; }
+#content.bands .form, #content.explore .form {
+    background-color: #fff;
+    padding-bottom: 15px;
+    max-height: 50px;
+    padding-top: 15px;
+}
+#content.bands .form input, #content.explore .form input {
+    width: 220px;
+    height: 40px;
+    padding: 0;
+    padding: 0 10px;
+    margin: 0;
+}
+#content.bands .form select, #content.explore .form select {
+    height: 40px;
+    width: 120px;
+    margin-left: 20px;
+}
+#content.explore .block .band-image {
+    width: 100%;
+    max-height: 100%;
+    position: relative;
+    background-color: #63a2b6;
+    background-size: 125%;
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+#content.explore .block:hover .band-image img {
+    transform: translateX(-10%);
+    transition: all 15s ease-out;
+}
+#content.explore .block .inner { min-height: 40px; }
+
+/* BAND PAGE */
+#bandpage .agenda table { width: 100%; }
+#bandpage .agenda tr th {
+    text-align: left;
+    font-size: 9px;
+    color: #c4c3c3;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f7f7f7;
+}
+#bandpage .agenda tr.highlight { font-weight: bold; }
+#bandpage .agenda td, #bandpage .agenda tr.edit td {
+    font-size: 12px;
+    padding: 20px 10px 20px 0;
+    width: 20%;
+}
+#bandpage .data-row td { cursor: pointer; }
+#bandpage table tr.edit { display: none; border-bottom: none; }
+#bandpage table tr.edit .btn { width: 100% !important; }
+#bandpage table tr.edit td { padding: 0; }
+#bandpage table tr.edit.active { display: table-row; }
+#bandpage table tr.edit input { height: 40px; width: 100%; margin: 0; }
+#bandpage .edit-agenda { margin-top: 20px; }

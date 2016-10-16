@@ -1,0 +1,14 @@
+#login
+    .full-overlay
+    .content
+        .inner
+            a(href='/auth/facebook' class="btn signin facebook") Log in with Facebook
+            a(href='/auth/twitter' class="btn signin twitter") Sign in with Twitter
+            a(href='/auth/google' class="btn signin google") Sign in with Google
+            hr
+            form(action='/auth/login' method='post' class='login-form')
+                input(type='email' ng-model="email" class='form-control' name='email' placeholder="Email")
+                input(type='password' ng-minlength="6" ng-model="password" class='form-control' name='password' placeholder="Password")
+                input(type='submit' value='Log in' class="btn white")
+            hr
+            p.disabled.small Not registered yet? #[a(href="#" class="register-btn") Create an account!]

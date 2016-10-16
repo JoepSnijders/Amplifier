@@ -1,0 +1,52 @@
+#sidebar
+    a(href="/")
+        .logo 
+        
+    .sidebar-content
+        .nav
+            ul
+                a(href="/app")
+                    li.app 
+                        span Explore Gigs
+                a(href="/app/bands")
+                    li.band 
+                        span Bands
+                a(href="/app/musicians")
+                    li.musicians 
+                        span Musicians
+                a(href="#")
+                    li.explore 
+                        span Messages
+
+        .profile   
+            hr
+            .name
+                if(sessionUser)
+                    if(typeof sessionUser.facebook.token !== 'undefined')
+                        a(href="/app/profile/#{sessionUser._id}")
+                            img(src='http://graph.facebook.com/' + sessionUser.facebook.id + '/picture?width=25' width="25" class="avatar")
+                            span.username #{sessionUser.facebook.firstName} #{sessionUser.facebook.lastName}
+                    if(typeof sessionUser.google.token !== 'undefined')
+                        a(href="/app/profile/#{sessionUser._id}")
+                            img(src=sessionUser.google.profilePicture width="25" class="avatar")
+                            span.username #{sessionUser.google.firstName} #{sessionUser.google.lastName}
+                    if(typeof sessionUser.twitter.token !== 'undefined')
+                        a(href="/app/profile/#{sessionUser._id}")
+                            img(src=sessionUser.twitter.profilePicture width="25" class="avatar")
+                            span.username #{sessionUser.twitter.name}
+                    if(typeof sessionUser.local.username !== 'undefined')
+                        a(href="/app/profile/#{sessionUser._id}")
+                            //- img(src='/images/no-profile.jpg' width="25" class="avatar")
+                            span.username #{sessionUser.local.username}
+                else
+                    a(href="#signup" class="signup")
+                        p Create an Account
+                    br 
+                    a(href="#login" class="login")
+                        p Log In
+                hr
+                a(href="/")
+                    p Back to homepage
+                span.close
+                    img(src="/images/toggle@2x.png" width="22" height="12")
+                

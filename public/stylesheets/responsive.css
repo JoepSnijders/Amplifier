@@ -1,0 +1,41 @@
+/* Desktop */
+@media screen and (min-width: 980px) {
+    .mobile-header { display: none; }
+}
+/* Tablet */
+@media screen  and (max-width: 979px) {
+    .mobile-header { display: none; }
+    #content .block { width: 45%; }
+}
+/* Mobile */
+@media screen and (max-width: 500px) {
+    .mobile-header {
+        display: block;
+        height: 40px;
+        width: 100%;
+        background: url('/images/toggle@2x.png') #171717 no-repeat 10px;
+        background-size: 22px;
+        cursor: pointer;
+    }
+    #sidebar { transform: translateX(-225px); }
+    #sidebar.opened { transform: translateX(0px); }
+    #create-band { transform: translateX(-225px); display: none; }
+
+    #content {
+        margin-left: 0;
+        width: 100%;
+    }
+    #content .form { max-height: inherit !important; }
+    #content .form input, #content .form select {
+        display: block;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-bottom: 10px !important;
+    }
+    #content .block { width: 95%; }
+
+    #bandpage .left, #bandpage .right { width: 100% !important; border: none !important; }
+
+    #content.profile .left, #content.profile .right { width: 100% !important; border: none !important; }
+    #right-sidebar.active .content { width: 75% !important; }
+}

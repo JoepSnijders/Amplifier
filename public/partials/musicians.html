@@ -1,0 +1,57 @@
+<div id="content" class="explore">
+    <div class="form">
+        <div class="container">
+            <form ng-submit="search(location, radius)">
+                <input type="text" name="location" ng-autocomplete ng-model="location" ng-value="location" placeholder="Location.." >
+                <select ng-model="radius" ng-init="radius='10'">
+                    <option value="10">10km Radius</option>
+                    <option value="50">50km Radius</option>
+                    <option value="100">100km Radius</option>
+                    <option value="200">200km Radius</option>
+                </select>
+                <input type="submit" class="btn white" name="submit" value="Zoek Muziekanten">
+            </form>
+        </div>
+    </div>
+    <div class="posts">
+        <div class="container">
+            <h3 ng-if="!data.musicians.length" ng-cloak>No musicians found.</h1>
+            <div ng-repeat="musician in data.musicians">
+                <a ng-href="/app/profile/{{ musician._id }}">
+                    <div class="block">
+                        <div class="inner">
+                            <div class="band">
+                                <div ng-show="musician.facebook.id">
+                                    <h3>{{ musician.facebook.firstName }} {{ musician.facebook.lastName }}</h3>
+                                </div>
+                                <div ng-show="musician.twitter.id">
+                                    <h3>{{ musician.twitter.firstName }} {{ musician.twitter.lastName }}</h3>
+                                </div>
+                                <div ng-show="musician.google.id">
+                                    <h3>{{ musician.google.firstName }} {{ musician.google.lastName }}</h3>
+                                </div>
+                                <div ng-show="musician.local.firstName">
+                                    <h3>{{ musician.local.firstName }} {{ musician.local.lastName }}</h3>
+                                </div>
+                            </div>
+                            <div class="genre">
+                                <span>{{ musician.profile.city}} - </span>
+                                <span ng-repeat="genre in musician.genres">{{ genre.name }} </span>
+                            </div>
+                        </div>
+                        <div ng-show="musician.facebook.id">
+                            <img ng-src="http://graph.facebook.com/{{ musician.facebook.id }}/picture?width=220" width="100%" alt="avatar" class="avatar" />
+                        </div>
+                        <div ng-show="musician.twitter.id">
+                        </div>
+                        <div ng-show="musician.google.id">
+                        </div>
+                        <div ng-show="musician.local.firstName">
+                            <img ng-src="/images/no-profile.jpg" width="100%" alt="avatar" class="avatar" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
